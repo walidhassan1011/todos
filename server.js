@@ -5,20 +5,20 @@ const app = express();
 app.use(express.static("public"));
 app.use(express.json());
 
-app.get("/", (res, req) => {
+app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/todos", (res, req) => {
+app.get("/todos", (req, res) => {
   res.json({ todos });
 });
 
-app.post("/todo", (res, req) => {
-  const data = req.body;
+app.post("/todo", (req, res) => {
+  const data = res.body;
   todos.push(data);
 });
 
-app.post("/delete", (res, req) => {
+app.post("/delete", (req, res) => {
   const { id, message } = req.body;
   todos.filter(id);
   todos.filter(message);
