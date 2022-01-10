@@ -20,29 +20,8 @@
   </head>
   <body>
     <div class="container">
-      <ul class="collection with-header">
+      <ul class="collection with-header" id="ul1">
         <li class="collection-header center"><h3>Todo's</h3></li>
-        <li class="collection-item">
-          <div>
-            First<a href="#!" class="secondary-content"
-              ><i class="material-icons">delete</i></a
-            >
-          </div>
-        </li>
-        <li class="collection-item">
-          <div>
-            Second<a href="#!" class="secondary-content"
-              ><i class="material-icons">delete</i></a
-            >
-          </div>
-        </li>
-        <li class="collection-item">
-          <div>
-            Third<a href="#!" class="secondary-content"
-              ><i class="material-icons">delete</i></a
-            >
-          </div>
-        </li>
       </ul>
 
       <form class="row">
@@ -50,10 +29,75 @@
           <div class="input-field col s6 l8">
             <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
             <label for="icon_prefix2">Add Todo</label>
-            <span class="btn"> Add Todo</span>
+            <span class="btn" onclick="postdata()"> Add Todo</span>
           </div>
         </div>
       </form>
     </div>
+    <script>
+      function getdata() {
+        fetch("/todos")
+          .then((response) => response.json())
+          .then((data) => {
+            const ulItem = document.getElementById("ul1");
+            const ilItem = document.getElementsByClassName("collection-item");
+            const containerLI = document.getElementById("containerLI");
+            const secondaryContent =
+              document.getElementsByClassName("secondary-content");
+            const materialIcons =
+              document.getElementsByClassName("material-icons");
+            console.log(data);
+            data.forEach((usertodo) => {
+              let li = document.createElement("li");
+              li.classList.add("collection-item");
+              let div = document.createElement("div");
+              let link = document.createElement("a");
+              link.classList.add("secondary-content");
+              let icon = document.createElement("i");
+              icon.classList.add("material-icons");
+              icon.id = usertodo.id;
+
+              icon.addEventListener("click", () => {
+                deletedata(icon.id);
+              });
+              let todo = document.createTextNode(usertodo.message);
+              let deletMess = document.createTextNode("delete");
+              ulItem.appendChild(li);
+              li.appendChild(div);
+              div.appendChild(todo);
+              div.appendChild(link);
+              link.appendChild(icon);
+              icon.appendChild(deletMess);
+            });
+          });
+      }
+      function postdata() {
+        let icon_prefix2 = document.getElementById("icon_prefix2").value;
+
+        const data = { message: icon_prefix2 };
+        fetch("/todo", {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        document.getElementById("icon_prefix2").value = "";
+      }
+
+      function deletedata(todoid) {
+        const data = { id: todoid };
+        fetch("/delete", {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        console.log(todoid);
+      }
+      getdata();
+    </script>
   </body>
 </html>

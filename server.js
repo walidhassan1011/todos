@@ -10,18 +10,20 @@ app.get("/", (req, res) => {
 });
 
 app.get("/todos", (req, res) => {
-  res.json({ todos });
+  res.json(todos);
 });
 
 app.post("/todo", (req, res) => {
-  const data = res.body;
-  todos.push(data);
+  const data = req.body;
+  const message = data.message;
+  let newtodo = { id: todos.length + 1, message };
+  todos.push(newtodo);
 });
 
 app.post("/delete", (req, res) => {
-  const { id, message } = req.body;
-  todos.filter(id);
-  todos.filter(message);
+  const data = req.body;
+  console.log(data.id);
+  todos = todos.filter((todo) => todo.id != data.id);
 });
 
 const PORT = process.env.PORT || 3000;
