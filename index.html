@@ -4,7 +4,56 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Todos</title>
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <ul class="collection with-header">
+        <li class="collection-header center"><h3>Todo's</h3></li>
+        <li class="collection-item">
+          <div>
+            First<a href="#!" class="secondary-content"
+              ><i class="material-icons">delete</i></a
+            >
+          </div>
+        </li>
+        <li class="collection-item">
+          <div>
+            Second<a href="#!" class="secondary-content"
+              ><i class="material-icons">delete</i></a
+            >
+          </div>
+        </li>
+        <li class="collection-item">
+          <div>
+            Third<a href="#!" class="secondary-content"
+              ><i class="material-icons">delete</i></a
+            >
+          </div>
+        </li>
+      </ul>
+
+      <form class="row">
+        <div class="row">
+          <div class="input-field col s6 l8">
+            <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+            <label for="icon_prefix2">Add Todo</label>
+            <span class="btn"> Add Todo</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>
